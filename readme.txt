@@ -16,7 +16,7 @@ CReate table books(
 
 ALTER TABLE <table_name> add column <column_name> TIMESTAMP NULL DEFAULT NULL;
 
-INSERT METHOD -- INSERT INTO students(student_first_name,student_last_name,student_course) VALUES ("MISHIMA","KAZUYA","BSIT");
+INSERT METHOD -- INSERT INTO students(studet_first_name,student_last_name,student_course) VALUES ("ALODIA","BALENDEZ","BSIT");
 
 
 
