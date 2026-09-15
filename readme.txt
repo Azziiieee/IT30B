@@ -17,6 +17,7 @@ CReate table books(
 ALTER TABLE <table_name> add column <column_name> TIMESTAMP NULL DEFAULT NULL;
 
 INSERT METHOD -- INSERT INTO students(student_first_name,student_last_name,student_course) VALUES ("MISHIMA","KAZUYA","BSIT");
+INSERT METHOD -- INSERT INTO students(studet_first_name,student_last_name,student_course) VALUES ("ALODIA","BALENDEZ","BSIT");
 
 
 
@@ -30,6 +31,12 @@ retrieve database/backup time -- source C:\IT30B\backups\08182026_library_db.sql
 
 automated with date and time backup -- mysqldump -u root -p --databases library_db > "C:\IT30B\backups\%date:~-4%%date:~4,2%%date:~7,2%_%time:~0,2%%time:~3,2%%time:~6,2%_library_db.sql
 
+mysqldump -u root -p  --databases library_db > D:\dev\it30b\backups
+
+retrieve database/backup time -- source D:\dev\it30b\backups\08182026_library_db.sql (directory of the backup)
+
+
+automated with date and time backup -- mysqldump -u root -p --databases library_db2 > "C:\Dev\IT30B-1\backups\%date:~-4%%date:~4,2%%date:~7,2%_%time:~0,2%%time:~3,2%%time:~6,2%_library_db2.sql
 lab 2
 
 ALTER TABLE <table_name> add column <column_name> TIMESTAMP NULL DEFAULT NULL; -- ADD COLUMN
