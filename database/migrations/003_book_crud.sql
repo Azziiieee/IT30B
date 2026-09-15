@@ -60,4 +60,4 @@ UPDATE books
 SET book_title='Hes Into Her',
      book_author='Maxinejiji',
     book_category='Romance'
-WHERE book_id = 3;
+WHERE book_id = 3; .
