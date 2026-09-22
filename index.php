@@ -24,14 +24,14 @@ try{
 // Session
 session_start();
 
-//Deteermine current section
+// Determine current section
 $section = $_GET['section'] ??'students';
 
 // determine CRUD Operation
 $action = $_GET['action'] ?? '';
 
 // Fetch students
-if($section==='students'){
+if($section==='students'){}
 
     $stmt =$pdo->query("
     SELECT *
@@ -39,9 +39,40 @@ if($section==='students'){
     ORDER BY student_id DESC
     ");
 
-    $students = $stmts->fetchAll();
-}
+    $students = $stmt->fetchAll();
 
+
+   // Create Student
+   if($section== 'students' && $action=== 'create'){
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $firstName = trim($_POST['student_first_name'] ?? '');
+        $lastName = trim($_POST['student_last_name'] ?? '');
+        $course = trim($_POST['student_course'] ?? '');
+
+        if($firstName !== '' && $lastName !== '' && $course !== ''){
+           $sql = "
+           INSERT INTO students (
+           student_first_name, 
+           student_last_name, 
+           student_course
+           ) 
+           VALUES (?,?,?)
+           ";
+           
+
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->execute([
+                $firstName,
+                $lastName,
+                $course
+            ]);
+
+           header('Location: index.php?section=students');
+            exit;
+        }
+   }
+}
 
 
 
@@ -52,7 +83,7 @@ if($section==='students'){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial_scale=1.0">
     <title>Library System</title>
 </head>
@@ -66,6 +97,56 @@ if($section==='students'){
 <hr>
 <?php if($section === 'students'): ?>
     <h1>Students</h1>
+
+    <p>
+        <a href="index.php?section=students&action=create">
+            Add Student
+        </a>
+    </p>
+
+<?php if($action === 'create'): ?>
+    <h2>Create Student</h2>
+    
+    <form method="POST">
+    <p>
+        <label>First Name: </label>
+    <br> 
+    <input type="text"
+            name="student_first_name"
+            required
+            />
+    </p>
+
+    <p>
+        <label>Last Name: </label>
+    <br>
+    <input type="text"
+            name="student_last_name"
+            required
+            />
+    </p>
+
+    <p>
+        <label>Course: </label>
+    <br>
+    <input type="text"
+            name="student_course"
+            required
+            />
+    </p>
+
+        <button type="submit" >
+            Save    
+        </button>
+
+        <a href="index.php?section=students">
+            Cancel  
+        </a>
+        
+    </form>
+
+<?php else: ?>
+
     <table>
         <thead>
             <tr>
